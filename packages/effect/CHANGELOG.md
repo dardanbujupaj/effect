@@ -1,5 +1,39 @@
 # effect
 
+## 4.0.0-rc.118
+
+### Patch Changes
+
+- [#8353](https://github.com/Effect-TS/effect/pull/8353) [`b409e3f`](https://github.com/Effect-TS/effect/commit/b409e3f8f48a108620c2c9ba52512942dfcf7563) Thanks @tim-smart! - Make `Effect.awaitAllChildren` interruptible while it waits for child fibers.
+
+- [#8339](https://github.com/Effect-TS/effect/pull/8339) [`325e0fb`](https://github.com/Effect-TS/effect/commit/325e0fb66a69705decafacb781e6f9fb45f4f462) Thanks @tim-smart! - Add data-last forms for selected safe Queue operations and selected Option, TxSemaphore, and AsyncResult APIs
+
+- [#8339](https://github.com/Effect-TS/effect/pull/8339) [`325e0fb`](https://github.com/Effect-TS/effect/commit/325e0fb66a69705decafacb781e6f9fb45f4f462) Thanks @tim-smart! - `TxPriorityQueue.fromIterable(order)(iterable)` passed its arguments to the implementation in the wrong order and produced a queue of `undefined` values; the data-first form was unaffected.
+
+- [#8354](https://github.com/Effect-TS/effect/pull/8354) [`1b4461e`](https://github.com/Effect-TS/effect/commit/1b4461ec3a17e527dd39576f1783f73354187f1f) Thanks @tim-smart! - Move unstable modules from `effect/unstable/*` to `effect/*` and remove the old export paths. Drop the `unstable` segment from imports. These APIs remain `@unstable`.
+
+- [#8150](https://github.com/Effect-TS/effect/pull/8150) [`b8d14d3`](https://github.com/Effect-TS/effect/commit/b8d14d3eed3cc15e939baa660e9800b96144a636) Thanks @Tyagiquamar! - Fix `Formatter.formatJson` to include `name` and `message` and preserve enumerable properties when stringifying `Error` instances without `toJSON`.
+  
+  ```ts
+  import { Formatter } from "effect"
+  
+  Formatter.formatJson(new Error("boom")) // now `{"name":"Error","message":"boom"}`, previously `{}`
+  ```
+
+- [#8359](https://github.com/Effect-TS/effect/pull/8359) [`8fca194`](https://github.com/Effect-TS/effect/commit/8fca1947498e50dfa10480221290115a99cee05b) Thanks @gcanti! - Fix `Number.remainder` for decimal operands whose scaled coefficients exceed the safe integer range, preserving the exact value of integer operands. This also prevents `Schema.isMultipleOf` from accepting or rejecting large values incorrectly.
+
+- [#8340](https://github.com/Effect-TS/effect/pull/8340) [`c79088d`](https://github.com/Effect-TS/effect/commit/c79088d69372ba533ecd6cacb846a43322c2d075) Thanks @fubhy! - Add family-aware internet address and multicast interface types to `NetAddress`
+
+- [#8337](https://github.com/Effect-TS/effect/pull/8337) [`3af6bd0`](https://github.com/Effect-TS/effect/commit/3af6bd0803ebdbc44b75ef82b16daa9a82ffa768) Thanks @mugnivenko! - Add PlatformError.isPlatformError guard
+
+- [#8345](https://github.com/Effect-TS/effect/pull/8345) [`1dbc4c3`](https://github.com/Effect-TS/effect/commit/1dbc4c382c783099c74c93dae20d72a12db92e69) Thanks @xia-chao! - Add `PubSub.isPubSub`, matching `Queue.isQueue` and `TxPubSub.isTxPubSub`.
+
+- [#8356](https://github.com/Effect-TS/effect/pull/8356) [`d426feb`](https://github.com/Effect-TS/effect/commit/d426feb658448593980da79937b6456fbef4a258) Thanks @tim-smart! - Split the encoding API into `effect/encoding/Base64`, `effect/encoding/Base64Url`, `effect/encoding/Hex`, and `effect/encoding/EncodingError`. The former `effect/Encoding` module has been removed; migrate each helper to its format module and use the shared error entrypoint to name or narrow encoding failures.
+  
+  Two migrations need special attention: `randomHex` is now `Hex.random`, and the runtime value of `EncodingErrorTypeId` changed from `~effect/Encoding/EncodingError` to `~effect/encoding/EncodingError`.
+
+- [#8348](https://github.com/Effect-TS/effect/pull/8348) [`7b81a95`](https://github.com/Effect-TS/effect/commit/7b81a95de1d0666e102ea9b29cd9a1fa05b2649c) Thanks @xia-chao! - Add `TxChunk.isTxChunk`, a type guard for `TxChunk` values. The other transactional data types already expose an equivalent `isTx*` guard.
+
 ## 4.0.0-rc.117
 
 ### Patch Changes
